@@ -16,6 +16,7 @@ const absPathToSrc = pathResolve(__dirname, 'src');
 const absPathToDist = pathResolve(__dirname, 'dist');
 const absPathToFont = pathResolve(__dirname, 'src/common/fonts');
 
+
 const webpackConfig = (env = {}) => {
   const _mode = (env.dev === true) ? 'development' : 'production';
   const {ifProduction} = getIfUtils(_mode);
@@ -23,6 +24,7 @@ const webpackConfig = (env = {}) => {
   console.log('xxxx _mode: ', _mode)
   console.log('xxxx env: ', env)
   console.log('xxxx ifProduction: ', ifProduction('prod', 'dev'))
+
   const devServer = ifProduction( {}, {
     devServer: {
       host: webpackDevServer_host,
