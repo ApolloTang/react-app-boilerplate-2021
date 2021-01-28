@@ -67,7 +67,6 @@ const webpackConfig = (env = {}) => {
         },
         {
           test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,
-          // loader: 'file-loader?name=./imgs/[name].[hash].[ext]',
           use: [
             {
               loader: 'file-loader',
@@ -78,7 +77,6 @@ const webpackConfig = (env = {}) => {
         },
         {
           test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
-          // loader: 'file-loader?name=fonts/[name].[ext]'
           use: [
             {
               loader: 'file-loader',
