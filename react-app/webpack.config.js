@@ -14,6 +14,7 @@ const webpackDevServer_host = '0.0.0.0';
 const webpackDevServer_port = '9090';
 const absPathToSrc = pathResolve(__dirname, 'src');
 const absPathToDist = pathResolve(__dirname, 'dist');
+const absPathToFont = pathResolve(__dirname, 'src/common/fonts');
 
 const webpackConfig = (env = {}) => {
   const _mode = (env.dev === true) ? 'development' : 'production';
@@ -27,7 +28,8 @@ const webpackConfig = (env = {}) => {
       host: webpackDevServer_host,
       port: webpackDevServer_port,
       historyApiFallback: true,
-      stats: 'minimal'
+      stats: 'minimal',
+      // writeToDisk: true
     }
   });
 
@@ -61,6 +63,27 @@ const webpackConfig = (env = {}) => {
           use: 'babel-loader',
           exclude: /node_modules/
         },
+        {
+          test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,
+          // loader: 'file-loader?name=./imgs/[name].[hash].[ext]',
+          use: [
+            {
+              loader: 'file-loader',
+              options: {name: './imgs/[name].[hash].[ext]'}
+            }
+          ],
+          exclude: absPathToFont
+        },
+        {
+          test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
+          // loader: 'file-loader?name=fonts/[name].[ext]'
+          use: [
+            {
+              loader: 'file-loader',
+              options: {name: './fonts/[name].[ext]'}
+            }
+          ],
+        },
         ifProduction(
           {
             test: /\.(css|less)$/,
@@ -77,6 +100,33 @@ const webpackConfig = (env = {}) => {
             exclude: [/node_modules/, /\.module\.(css|less)$/]
           }
         ),
+        ifProduction(
+          {
+            test: /\.module\.(css|less)$/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              'css-loader?modules=true&localsConvention=camelCase',
+              'less-loader'
+            ],
+            exclude: /node_modules/
+          },
+          {
+            test: /\.module\.(css|less)$/,
+            // loader: 'style-loader!css-loader?modules=true&localsConvention=camelCase!less-loader',
+            use: [
+              { loader: "style-loader" },
+              {
+                loader: "css-loader",
+                options: { modules: true, localsConvention:'camelCase' }
+              },
+              {
+                loader: "less-loader",
+                options: { lessOptions: { strictMath: true } }
+              },
+            ],
+            exclude: /node_modules/
+          }
+        )
       ])
     },
     plugins: removeEmpty([
