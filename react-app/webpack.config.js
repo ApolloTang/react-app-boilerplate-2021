@@ -130,10 +130,10 @@ const webpackConfig = (env = {}) => {
       ])
     },
     plugins: removeEmpty([
-      // new ProgressBarPlugin({
-      //   format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
-      //   clear: false
-      // }),
+      new ProgressBarPlugin({
+        format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+        clear: false
+      }),
       new HtmlWebpackPlugin({
         template: 'index.html',
         title: title
