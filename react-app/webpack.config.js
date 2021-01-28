@@ -137,6 +137,11 @@ const webpackConfig = (env = {}) => {
         template: 'index.html',
         title: title
       }),
+      ifProduction(
+        new MiniCssExtractPlugin({
+          filename: "[name]-[chunkhash].css",
+        })
+      )
     ])
   };
   console.log(configOut)
