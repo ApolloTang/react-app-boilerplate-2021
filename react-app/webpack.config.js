@@ -100,32 +100,26 @@ const webpackConfig = (env = {}) => {
             exclude: [/node_modules/, /\.module\.(css|less)$/]
           }
         ),
-        // ifProduction(
-        //   {
-        //     test: /\.module\.(css|less)$/,
-        //     use: [
-        //       MiniCssExtractPlugin.loader,
-        //       'css-loader?modules=true&localsConvention=camelCase',
-        //       'less-loader'
-        //     ],
-        //     exclude: /node_modules/
-        //   },
-        //   {
-        //     test: /\.module\.(css|less)$/,
-        //     use: [
-        //       { loader: "style-loader" },
-        //       {
-        //         loader: "css-loader",
-        //         options: { modules: true, localsConvention:'camelCase' }
-        //       },
-        //       {
-        //         loader: "less-loader",
-        //         options: { lessOptions: { strictMath: true } }
-        //       },
-        //     ],
-        //     exclude: /node_modules/
-        //   }
-        // )
+        ifProduction(
+          {
+            test: /\.module\.(css|less)$/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              { loader: "css-loader", options: { modules: { exportLocalsConvention: "camelCase" } } },
+              { loader: 'less-loader'},
+            ],
+            exclude: /node_modules/
+          },
+          {
+            test: /\.module\.(css|less)$/,
+            use: [
+              { loader: "style-loader" },
+              { loader: "css-loader", options: { modules: { exportLocalsConvention: "camelCase" } } },
+              { loader: "less-loader", options: { lessOptions: { strictMath: true } } },
+            ],
+            exclude: /node_modules/
+          }
+        )
       ])
     },
     plugins: removeEmpty([
