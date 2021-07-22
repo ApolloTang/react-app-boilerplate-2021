@@ -2,16 +2,20 @@ import React from 'react'
 import ReactDom from 'react-dom'
 
 import fonts from 'common/fonts/'
-import fooStyleModule from './foo.module.less'
 
 import './main.less'
-import img from './react.png'
 
 import CuteCat from './cute-cat/index.jsx'
 
+import reactLogo from './react-logo.svg'
+console.log('xxx :', reactLogo)
+
 const App = () => <>
   <div>hello react</div>
-  <div><img src={img} /></div>
+  <div>
+    <img src={`${reactLogo}`}/>
+  </div>
+
   <CuteCat />
 </>
 const appContainer = document.getElementById('app-container')

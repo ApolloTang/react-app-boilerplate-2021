@@ -69,21 +69,26 @@ const webpackConfig = (env = {}) => {
         },
         // -- handle images --
         {
-          test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,
+          test: /\.jpe?g$|\.ico$|\.gif$|\.png$$/,
           type: 'asset/resource',
           generator: {
             filename: 'imgs/[hash][ext][query]'
           },
           exclude: absPathToFont
         },
+        // -- handle loading svg --
+        // fix me this does not work
+        {
+          test: /\.svg$/,
+          type: 'asset/inline',
+          exclude: absPathToFont
+        },
         {
           test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {name: './fonts/[name].[ext]'}
-            }
-          ],
+          type: 'asset/resource',
+          generator: {
+            filename: 'fonts/[hash][ext][query]'
+          },
         },
         ifProduction(
           {
