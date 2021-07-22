@@ -71,6 +71,9 @@ const webpackConfig = (env = {}) => {
         {
           test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,
           type: 'asset/resource',
+          generator: {
+            filename: 'imgs/[hash][ext][query]'
+          },
           exclude: absPathToFont
         },
         {
