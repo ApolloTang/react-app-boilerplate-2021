@@ -85,14 +85,14 @@ const webpackConfig = (env = {}) => {
         // },
         // -- handle loading font --
         // fix me this does not work
-        // {
-        //   test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
-        //   type: 'asset/resource',
-        //   generator: {
-        //     filename: 'fonts/[hash][ext][query]'
-        //   },
-        //   include: absPathToFont
-        // },
+        {
+          test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
+          type: 'asset/resource',
+          generator: {
+            filename: 'fonts/[hash][ext][query]'
+          },
+          include: absPathToFont
+        },
         ifProduction(
           {
             test: /\.(css|less)$/,
