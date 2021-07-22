@@ -62,12 +62,17 @@ const webpackConfig = (env = {}) => {
     },
     module: {
       rules: removeEmpty([
+        // ----------------------------------------
+        //  loading JavaScript
+        // ----------------------------------------
         {
           test: /\.jsx?/,
           use: 'babel-loader',
           exclude: /node_modules/
         },
-        // -- handle images --
+        // ----------------------------------------
+        //  loading images
+        // ----------------------------------------
         {
           test: /\.jpe?g$|\.ico$|\.gif$|\.png|\.svg$/,
           type: 'asset/resource',
@@ -76,15 +81,18 @@ const webpackConfig = (env = {}) => {
           },
           exclude: absPathToFont
         },
-        // -- handle loading svg --
-        // fix me this does not work
-        // {
-        //   test: /\.svg$/,
-        //   type: 'asset/inline',
-        //   exclude: absPathToFont
-        // },
-        // -- handle loading font --
-        // fix me this does not work
+        // ----------------------------------------
+        //  loading svg inline (data url)
+        //  fix me, this does not work
+        // ----------------------------------------
+          // {
+          //   test: /\.svg$/,
+          //   type: 'asset/inline',
+          //   exclude: absPathToFont
+          // },
+        // ----------------------------------------
+        //  loading fonts
+        // ----------------------------------------
         {
           test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
           type: 'asset/resource',
