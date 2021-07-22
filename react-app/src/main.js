@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
-import fonts from 'common/fonts/'
+// import fonts from 'common/fonts/'
 
 import './main.less'
 

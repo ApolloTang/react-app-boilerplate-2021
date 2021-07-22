@@ -69,7 +69,7 @@ const webpackConfig = (env = {}) => {
         },
         // -- handle images --
         {
-          test: /\.jpe?g$|\.ico$|\.gif$|\.png$$/,
+          test: /\.jpe?g$|\.ico$|\.gif$|\.png|\.svg$/,
           type: 'asset/resource',
           generator: {
             filename: 'imgs/[hash][ext][query]'
@@ -78,18 +78,21 @@ const webpackConfig = (env = {}) => {
         },
         // -- handle loading svg --
         // fix me this does not work
-        {
-          test: /\.svg$/,
-          type: 'asset/inline',
-          exclude: absPathToFont
-        },
-        {
-          test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
-          type: 'asset/resource',
-          generator: {
-            filename: 'fonts/[hash][ext][query]'
-          },
-        },
+        // {
+        //   test: /\.svg$/,
+        //   type: 'asset/inline',
+        //   exclude: absPathToFont
+        // },
+        // -- handle loading font --
+        // fix me this does not work
+        // {
+        //   test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
+        //   type: 'asset/resource',
+        //   generator: {
+        //     filename: 'fonts/[hash][ext][query]'
+        //   },
+        //   include: absPathToFont
+        // },
         ifProduction(
           {
             test: /\.(css|less)$/,
