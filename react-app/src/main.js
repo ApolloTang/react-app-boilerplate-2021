@@ -6,7 +6,12 @@ import fooStyleModule from './foo.module.less'
 console.log('xxxx', fooStyleModule)
 
 import './main.less'
-const App = () => <div>hello react</div>
+import img from './react.png'
+
+const App = () => <>
+  <div>hello react</div>
+  <div><img src={img} /></div>
+</>
 const appContainer = document.getElementById('app-container')
 ReactDom.render( <App/>,  appContainer)
 

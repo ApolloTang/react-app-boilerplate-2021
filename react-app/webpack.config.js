@@ -49,10 +49,12 @@ const webpackConfig = (env = {}) => {
       {
         publicPath: '/',
         filename: '[name]-[chunkhash].js',
-        path: absPathToDist
+        path: absPathToDist,
+        assetModuleFilename: 'assets/[hash][ext][query]'
       },
       {
-        publicPath: '/'
+        publicPath: '/',
+        assetModuleFilename: 'assets/[hash][ext][query]'
       }
     ),
     resolve: {
@@ -65,14 +67,10 @@ const webpackConfig = (env = {}) => {
           use: 'babel-loader',
           exclude: /node_modules/
         },
+        // -- handle images --
         {
           test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {name: './imgs/[name].[hash].[ext]'}
-            }
-          ],
+          type: 'asset/resource',
           exclude: absPathToFont
         },
         {
