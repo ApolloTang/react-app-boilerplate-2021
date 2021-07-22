@@ -63,7 +63,7 @@ const webpackConfig = (env = {}) => {
     module: {
       rules: removeEmpty([
         {
-          test: /\.js/,
+          test: /\.jsx?/,
           use: 'babel-loader',
           exclude: /node_modules/
         },
