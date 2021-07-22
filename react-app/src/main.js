@@ -3,7 +3,6 @@ import ReactDom from 'react-dom'
 
 import fonts from 'common/fonts/'
 import fooStyleModule from './foo.module.less'
-console.log('xxxx', fooStyleModule)
 
 import './main.less'
 import img from './react.png'
